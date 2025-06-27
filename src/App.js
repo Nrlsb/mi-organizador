@@ -363,26 +363,6 @@ export default function App() {
         return () => unsubscribe();
     }, []);
     
-     useEffect(() => {
-        // Esta función se encarga del token personalizado cuando esté disponible.
-        const handleCustomToken = async () => {
-             if (auth.currentUser) return; // Ya hay un usuario.
-             
-             if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                 try {
-                     await signInWithCustomToken(auth, __initial_auth_token);
-                 } catch (error) {
-                     console.error("Error al iniciar sesión con token personalizado:", error);
-                     // Si el token falla, intentar anónimo como respaldo
-                     if (!auth.currentUser) await signInAnonymously(auth);
-                 }
-             }
-        };
-
-        handleCustomToken();
-    }, []);
-
-
     const renderView = () => {
         if (!isAuthReady) {
             return <div className="text-center p-10"><p className="text-lg">Inicializando y conectando...</p></div>;
