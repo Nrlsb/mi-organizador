@@ -52,7 +52,7 @@ function Tasks({ db, userId }) {
     useEffect(() => {
         if (!userId) return;
         setLoading(true);
-        const tasksCollectionPath = `/artifacts/${appId}/users/${userId}/tasks`;
+        const tasksCollectionPath = `users/${userId}/tasks`;
         const q = query(collection(db, tasksCollectionPath));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -95,13 +95,13 @@ function Tasks({ db, userId }) {
 
     const handleToggleTask = async (task) => {
         if (!userId) return;
-        const taskDocRef = doc(db, `/artifacts/${appId}/users/${userId}/tasks`, task.id);
+        const taskDocRef = doc(db, `users/${userId}/tasks`, task.id);
         await updateDoc(taskDocRef, { completed: !task.completed });
     };
 
     const handleDeleteTask = async (taskId) => {
         if (!userId) return;
-        const taskDocRef = doc(db, `/artifacts/${appId}/users/${userId}/tasks`, taskId);
+        const taskDocRef = doc(db, `users/${userId}/tasks`, taskId);
         await deleteDoc(taskDocRef);
     };
 
@@ -177,7 +177,7 @@ function MarketList({ db, userId }) {
     const handleAddItem = async (e) => {
         e.preventDefault();
         if (newItem.trim() === '' || !userId) return;
-        const marketCollectionPath = `/artifacts/${appId}/users/${userId}/market_items`;
+        const marketCollectionPath = `users/${userId}/market_items`;
         await addDoc(collection(db, marketCollectionPath), {
             name: newItem,
             checked: false,
@@ -188,13 +188,13 @@ function MarketList({ db, userId }) {
 
     const handleToggleItem = async (item) => {
         if (!userId) return;
-        const itemDocRef = doc(db, `/artifacts/${appId}/users/${userId}/market_items`, item.id);
+        const itemDocRef = doc(db, `users/${userId}/market_items`, item.id);
         await updateDoc(itemDocRef, { checked: !item.checked });
     };
 
     const handleDeleteItem = async (itemId) => {
         if (!userId) return;
-        const itemDocRef = doc(db, `/artifacts/${appId}/users/${userId}/market_items`, itemId);
+        const itemDocRef = doc(db, `users/${userId}/market_items`, itemId);
         await deleteDoc(itemDocRef);
     };
 
@@ -270,7 +270,7 @@ function Expenses({ db, userId }) {
             // Se puede agregar una notificación visual al usuario aquí
             return;
         }
-        const expensesCollectionPath = `/artifacts/${appId}/users/${userId}/expenses`;
+        const expensesCollectionPath = `users/${userId}/expenses`;
         await addDoc(collection(db, expensesCollectionPath), {
             description,
             amount: expenseAmount,
@@ -282,7 +282,7 @@ function Expenses({ db, userId }) {
 
     const handleDeleteExpense = async (expenseId) => {
         if (!userId) return;
-        const expenseDocRef = doc(db, `/artifacts/${appId}/users/${userId}/expenses`, expenseId);
+        const expenseDocRef = doc(db, `users/${userId}/expenses`, expenseId);
         await deleteDoc(expenseDocRef);
     };
 
