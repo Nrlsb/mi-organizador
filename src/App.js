@@ -81,7 +81,7 @@ function Tasks({ db, userId }) {
         e.preventDefault();
         if (newTask.trim() === '' || !userId) return;
         try {
-            const tasksCollectionPath = `/artifacts/${appId}/users/${userId}/tasks`;
+            const tasksCollectionPath = `users/${userId}/tasks`;
             await addDoc(collection(db, tasksCollectionPath), {
                 text: newTask,
                 completed: false,
@@ -150,7 +150,7 @@ function MarketList({ db, userId }) {
     useEffect(() => {
         if (!userId) return;
         setLoading(true);
-        const marketCollectionPath = `/artifacts/${appId}/users/${userId}/market_items`;
+       const marketCollectionPath = `users/${userId}/market_items`;
         const q = query(collection(db, marketCollectionPath));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -244,7 +244,7 @@ function Expenses({ db, userId }) {
     useEffect(() => {
         if (!userId) return;
         setLoading(true);
-        const expensesCollectionPath = `/artifacts/${appId}/users/${userId}/expenses`;
+       const expensesCollectionPath = `users/${userId}/expenses`;
         const q = query(collection(db, expensesCollectionPath));
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
