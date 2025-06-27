@@ -1,1 +1,1 @@
-Configurar Tailwind CSS para producción
+Implementar Tailwind CSS vía CDN
