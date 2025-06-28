@@ -1,1 +1,1 @@
-Recrear craco.config.js después de la eliminación accidental
+actualizacion en tiempo real
